@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import {useState} from "react";
 import {Sun, Moon} from "react-feather"
+import Weather from '../components/Weather';
 
 export default function Home() {
 
-  const [dark, setDark] = useState(true)
+  const [dark, setDark] = useState(false)
 
   return (
     <div className={`container ${dark ? "dark" : ""}`} >
@@ -33,7 +34,7 @@ export default function Home() {
 
         <code className={`${dark ? "dark-code" : ""}`}>Always Remember: You are a cutie.</code>
 
-       
+          <Weather/>
 
         <div className="grid">
           
@@ -199,7 +200,7 @@ export default function Home() {
           text-align: left;
           color: inherit;
           text-decoration: none;
-          border: 1px solid #eaeaea;
+          border: 2px solid #eaeaea;
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
         }
