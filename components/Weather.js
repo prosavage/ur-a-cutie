@@ -7,7 +7,6 @@ import {
   Sun,
   Circle,
 } from "react-feather";
-import { format } from "date-fns";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -15,27 +14,15 @@ export default function Weather() {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=32.609856&lon=-85.480782&appid=${process.env.WEATHER_API_KEY}&part=daily&units=Imperial`
-      )
+    axios.get(`/api/weather`)
       .then((res) => {
-        setDays(
-          res.data.daily.map((day) => {
-            return {
-              icon: day.weather[0].main,
-              desc: day.weather[0].description.replace(" intensity", ""),
-              date: format(new Date(day.dt * 1000), "MM/dd"),
-              temp: { day: day.temp.day, night: day.temp.night },
-            };
-          })
-        );
+        setDays(res.data.days)
       });
   }, []);
 
   return (
     <div className="weather-wrapper">
-      <p>Weather</p>
+      <h3>Weather</h3>
       <div className="weather-container">
         {days.map((day) => {
           return <Day info={day} />;
@@ -49,16 +36,20 @@ export default function Weather() {
 
           justify-content: center;
           align-items: center;
+          padding-top: 15px;
         }
 
-        .weather-wrapper p {
-          line-height: 1.5;
+        .weather-wrapper h3 {
+          margin: 0 0 1rem 0;
           font-size: 1.5rem;
         }
 
         .weather-container {
           display: flex;
           flex-direction: row;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
 
           padding-top: 15px;
         }
@@ -104,13 +95,23 @@ function Day(props) {
       <style jsx>{`
         .day-container {
           display: flex;
+          width: 100px;
+          text-align: center;
           flex-direction: column;
           justify-content: center;
           align-items: center;
           padding: 1.5rem;
           border: 2px solid #eaeaea;
-         margin: 0 10px;
-         border-radius: 10px;
+          margin-right: 10px;
+          border-radius: 10px;
+          transition: color 0.15s ease, border-color 0.15s ease;
+        }
+
+        .day-container :hover,
+        .day-container :active,
+        .day-container :focus {
+          color: #0070f3;
+          border-color: #0070f3;
         }
       `}</style>
     </div>
