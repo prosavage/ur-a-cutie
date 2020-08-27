@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 This is a little homepage I created for my girlfriend to use, it just has some links and pulls weather data right on to the webpage.
 
 WeatherData is provided by OpenWeather, and it is wrapped in a serverless function.
-It also shows a random compliment, which is also pulled from a serverless function.
+<br/>It also shows a random compliment, which is also pulled from a serverless function.
 
 
 ## Getting Started
