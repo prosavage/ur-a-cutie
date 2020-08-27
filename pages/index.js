@@ -95,7 +95,7 @@ export default function Home() {
         <code className={`${dark ? "dark-code" : ""}`}>
           Always Remember: {compliment}</code>
 
-        <Weather days={days} />
+        <Weather days={days} dark={dark}/>
 
         <div className="grid">
 
@@ -169,6 +169,28 @@ export default function Home() {
         .dark-code {
           color: black;
         }
+
+        code:hover,
+        code:active,
+        code:focus {
+          color: #023e8a;
+          border-color: #023e8a;
+        }
+
+        .dark-code:hover,
+        .dark-code:active,
+        .dark-code:focus {
+          background: #7CFFCB;
+          border-color: #7CFFCB;
+        }
+
+        .dark .card:hover,
+        .dark .card:active,
+        .dark .card:focus {
+          color: #7CFFCB;
+          border-color: #7CFFCB;
+        }
+      
 
         .container {
           min-height: 100vh;
@@ -252,15 +274,12 @@ export default function Home() {
           padding: 0.75rem;
           font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
-        code:hover,
-        code:active,
-        code:focus {
-          color: #023e8a;
-          border-color: #023e8a;
-        }
+        
+
+
 
         .grid {
           display: flex;

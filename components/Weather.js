@@ -7,8 +7,6 @@ import {
   Sun,
   Circle,
 } from "react-feather";
-import { useEffect, useState } from "react";
-import axios from "axios";
 
 export default function Weather(props) {
 
@@ -19,7 +17,7 @@ export default function Weather(props) {
       <h3>Weather</h3>
       <div className="weather-container">
         {props.days.map((day) => {
-          return <Day info={day} />;
+          return <Day info={day} dark={props.dark} />;
         })}
       </div>
 
@@ -80,7 +78,7 @@ function Day(props) {
   };
 
   return (
-    <div className="day-container">
+    <div className={`day-container ${props.dark ? "dark-day-container" : ""}`}>
       <p>{props.info.date.toString()}</p>
       {getIcon(props.info.icon)}
       <p>{props.info.temp.day}&#176;</p>
@@ -106,6 +104,13 @@ function Day(props) {
         .day-container :focus {
           color: #023e8a;
           border-color: #023e8a;
+        }
+
+        .dark-day-container:hover,
+        .dark-day-container:active,
+        .dark-day-container:focus {
+          color: #7CFFCB;
+          border-color: #7CFFCB;
         }
       `}</style>
     </div>
