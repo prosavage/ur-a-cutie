@@ -10,21 +10,15 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function Weather() {
-  const [days, setDays] = useState([]);
+export default function Weather(props) {
 
-  useEffect(() => {
-    axios.get(`/api/weather`)
-      .then((res) => {
-        setDays(res.data.days)
-      });
-  }, []);
+
 
   return (
     <div className="weather-wrapper">
       <h3>Weather</h3>
       <div className="weather-container">
-        {days.map((day) => {
+        {props.days.map((day) => {
           return <Day info={day} />;
         })}
       </div>
@@ -110,8 +104,8 @@ function Day(props) {
         .day-container :hover,
         .day-container :active,
         .day-container :focus {
-          color: #0070f3;
-          border-color: #0070f3;
+          color: #023e8a;
+          border-color: #023e8a;
         }
       `}</style>
     </div>

@@ -1,11 +1,59 @@
 import Head from 'next/head'
-import {useState} from "react";
-import {Sun, Moon} from "react-feather"
+import { useEffect, useState } from "react";
+import { Sun, Moon } from "react-feather"
 import Weather from '../components/Weather';
+import axios from "axios";
+import Loader from 'react-loader-spinner'
 
 export default function Home() {
 
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(false);
+  const [compliment, setCompliment] = useState("");
+  const [days, setDays] = useState([]);
+
+  useEffect(() => {
+    axios.get("/api/compliment").then(res => setCompliment(res.data.compliment))
+  }, [])
+
+  useEffect(() => {
+    axios.get(`/api/weather`)
+      .then((res) => {
+        setDays(res.data.days)
+      });
+  }, []);
+
+  if (compliment.length === 0 || days.length === 0) {
+    return <div className="loading-container">
+      <Loader
+        type="Hearts"
+        color="#023e8a"
+        height={50}
+        width={50}
+        timeout={10000}
+      />
+      <code>project ur-a-cutie</code>
+
+      <style jsx>{`
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        code {
+          background: #fafafa;
+          border-radius: 5px;
+          padding: 0.75rem;
+          font-size: 1.1rem;
+          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+        }
+        `}</style>
+    </div>
+  }
 
   return (
     <div className={`container ${dark ? "dark" : ""}`} >
@@ -26,18 +74,19 @@ export default function Home() {
         <div className="toggle-container">
           {dark && <Sun onClick={() => {
             setDark(false)
-          }}/>}
+          }} />}
           {!dark && <Moon onClick={() => {
             setDark(true)
-          }}/>}
+          }} />}
         </div>
 
-        <code className={`${dark ? "dark-code" : ""}`}>Always Remember: You are a cutie.</code>
+        <code className={`${dark ? "dark-code" : ""}`}>
+          Always Remember: {compliment}.</code>
 
-          <Weather/>
+        <Weather days={days} />
 
         <div className="grid">
-          
+
 
           <a href="https://auburn.instructure.com" className="card">
             <h3>Canvas &rarr;</h3>
@@ -79,11 +128,11 @@ export default function Home() {
 
       <footer>
         <a
-          href="https://prosavage.net"
+          href="https://github.com/ProSavage/ur-a-cutie"
           target="_blank"
           rel="noopener noreferrer"
         >
-          I love you.
+          <code>project ur-a-cutie</code>
         </a>
       </footer>
 
@@ -183,6 +232,13 @@ export default function Home() {
             DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
+        code:hover,
+        code:active,
+        code:focus {
+          color: #023e8a;
+          border-color: #023e8a;
+        }
+
         .grid {
           display: flex;
           align-items: center;
@@ -208,8 +264,8 @@ export default function Home() {
         .card:hover,
         .card:focus,
         .card:active {
-          color: #0070f3;
-          border-color: #0070f3;
+          color: #023e8a;
+          border-color: #023e8a;
         }
 
         .card h3 {
@@ -250,5 +306,6 @@ export default function Home() {
         }
       `}</style>
     </div>
+
   )
 }
