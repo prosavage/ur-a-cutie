@@ -127,6 +127,16 @@ export default function Home() {
           </a>
 
           <a
+            href="https://youtube.com"
+            className="card"
+          >
+            <h3>Youtube &rarr;</h3>
+            <p>
+              Try Guys & more.
+            </p>
+          </a>
+
+          <a
             href="https://www.google.com/search?q=cute+dog+pics&sxsrf=ALeKk02j6LDqo0A0nBh_6_NvSNw6S3Rksg:1598465971025&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiQso3jvbnrAhVwplkKHZ5qAk0Q_AUoAXoECA0QAw&biw=896&bih=984"
             className="card"
           >
@@ -146,6 +156,7 @@ export default function Home() {
         >
           <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
         </a>
+        
       </footer>
 
       <style jsx>{`
