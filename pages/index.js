@@ -182,6 +182,7 @@ export default function Home() {
         .dark-code:focus {
           background: #7CFFCB;
           border-color: #7CFFCB;
+          color: black;
         }
 
         .dark .card:hover,
