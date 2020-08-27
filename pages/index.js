@@ -12,6 +12,7 @@ export default function Home() {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
+    setDark(window.localStorage.getItem("dark"))
     axios.get("/api/compliment").then(res => setCompliment(res.data.compliment))
   }, [])
 
@@ -23,7 +24,7 @@ export default function Home() {
   }, []);
 
   if (compliment.length === 0 || days.length === 0) {
-    return <div className="loading-container">
+    return <div className={`loading-container ${dark ? "dark" : ""}`}>
       <Loader
         type="Hearts"
         color="#023e8a"
@@ -31,9 +32,18 @@ export default function Home() {
         width={50}
         timeout={10000}
       />
-      <code>project ur-a-cutie</code>
+      <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
 
       <style jsx>{`
+
+      .dark {
+          background: #212121;
+          color: white;
+        }
+
+        .dark-code {
+          color: black;
+        }
         .loading-container {
             display: flex;
             flex-direction: column;
@@ -73,15 +83,17 @@ export default function Home() {
 
         <div className="toggle-container">
           {dark && <Sun onClick={() => {
+            window.localStorage.setItem("dark", false)
             setDark(false)
           }} />}
           {!dark && <Moon onClick={() => {
+            window.localStorage.setItem("dark", true)
             setDark(true)
           }} />}
         </div>
 
         <code className={`${dark ? "dark-code" : ""}`}>
-          Always Remember: {compliment}.</code>
+          Always Remember: {compliment}</code>
 
         <Weather days={days} />
 
@@ -132,14 +144,14 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <code>project ur-a-cutie</code>
+          <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
         </a>
       </footer>
 
       <style jsx>{`
 
         .dark {
-          background: black;
+          background: #212121;
           color: white;
         }
 
