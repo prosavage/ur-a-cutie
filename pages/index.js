@@ -12,7 +12,7 @@ export default function Home() {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
-    setDark(window.localStorage.getItem("dark"))
+    setDark(window.localStorage.getItem("theme") === "dark")
     axios.get("/api/compliment").then(res => setCompliment(res.data.compliment))
   }, [])
 
@@ -83,11 +83,11 @@ export default function Home() {
 
         <div className="toggle-container">
           {dark && <Sun onClick={() => {
-            window.localStorage.setItem("dark", false)
+            window.localStorage.setItem("theme", "light")
             setDark(false)
           }} />}
           {!dark && <Moon onClick={() => {
-            window.localStorage.setItem("dark", true)
+            window.localStorage.setItem("theme", "dark")
             setDark(true)
           }} />}
         </div>
