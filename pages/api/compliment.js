@@ -9,7 +9,6 @@ export default async (req, res) => {
         "Your smile is perfect 👌",
         "You deserve the world 🌎",
         "You light up my world 🔦",
-        "You have a good taste in boyfriends 👅",
         "You are flawless 🧐",
         "You are sexy 😏",
         "You are looking great today 😊",
