@@ -13,13 +13,14 @@ import {
   Wind,
   Sunset,
 } from "react-feather";
+import { getIcon } from "./Weather";
 
 export default function DetailedDay(props) {
   return (
     <div className={"detailed-content-row"}>
       <div className={"detailed-content-container"}>
         <div className={"detailed-content-row"}>
-          <CloudDrizzle />
+          {getIcon(props.info.icon)}
           <div className={"detailed-content-column"}>
             <div className={"spacer"}>
               <p>{props.info.date_full}</p>
@@ -47,7 +48,7 @@ export default function DetailedDay(props) {
               <Umbrella />
             </div>
             <div className={"spacer"}>
-              <p>Rain: {props.info.details.rain}%</p>
+              <p>Rain: {props.info.details.rain}mm</p>
             </div>
           </div>
         </div>

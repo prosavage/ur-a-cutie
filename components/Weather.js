@@ -74,31 +74,7 @@ export default function Weather(props) {
 }
 
 function Day(props) {
-  const getIcon = (iconString) => {
-    switch (iconString) {
-      case "Thunderstorm":
-        return <CloudLightning />;
-        break;
-      case "Rain":
-        return <CloudRain />;
-        break;
-      case "Drizzle":
-        return <CloudDrizzle />;
-        break;
-      case "Snow":
-        return <CloudSnow />;
-        break;
-      case "Atmosphere":
-        return <Circle />;
-        break;
-      case "Clear":
-        return <Sun />;
-        break;
-      case "Clouds":
-        return <Cloud />;
-        break;
-    }
-  };
+  
 
   return (
     <div
@@ -173,3 +149,30 @@ function Day(props) {
     </div>
   );
 }
+
+
+export const getIcon = (iconString) => {
+  switch (iconString) {
+    case "Thunderstorm":
+      return <CloudLightning />;
+      break;
+    case "Rain":
+      return <CloudRain />;
+      break;
+    case "Drizzle":
+      return <CloudDrizzle />;
+      break;
+    case "Snow":
+      return <CloudSnow />;
+      break;
+    case "Atmosphere":
+      return <Circle />;
+      break;
+    case "Clear":
+      return <Sun />;
+      break;
+    case "Clouds":
+      return <Cloud />;
+      break;
+  }
+};
