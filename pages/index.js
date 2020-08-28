@@ -27,7 +27,7 @@ export default function Home() {
     return <div className={`loading-container ${dark ? "dark" : ""}`}>
       <Loader
         type="Hearts"
-        color="#023e8a"
+        color={dark ? "#7CFFCB" : "#023e8a"}
         height={50}
         width={50}
         timeout={10000}
