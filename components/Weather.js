@@ -28,10 +28,20 @@ export default function Weather(props) {
                   setSelectedDay(day);
                 }}
                 info={day}
+                dark={props.dark}
               />
             );
           })}
-        {selectedDay && <Day detailed info={selectedDay} />}
+        {selectedDay && (
+          <Day
+            onSelectEvent={() => {
+              setSelectedDay(undefined);
+            }}
+            detailed
+            info={selectedDay}
+            dark={props.dark}
+          />
+        )}
       </div>
 
       <style jsx>{`
@@ -93,18 +103,18 @@ function Day(props) {
   return (
     <div
       onClick={props.onSelectEvent}
-      className={`day-container`}
+      className={`day-container ${props.dark ? "dark-day-container" : ""}`}
     >
-      {!props.detailed && <div className={"mini-data-container minimal"}>
-        <p>{props.info.date.toString()}</p>
-        {getIcon(props.info.icon)}
-        <p>{props.info.temp.day}&#176;</p>
-        <p>{props.info.desc}</p>
-      </div>}
-
-      {props.detailed && (
-        <DetailedDay info={props.info}/>
+      {!props.detailed && (
+        <div className={"mini-data-container minimal"}>
+          <p>{props.info.date.toString()}</p>
+          {getIcon(props.info.icon)}
+          <p>{props.info.temp.day}&#176;</p>
+          <p>{props.info.desc}</p>
+        </div>
       )}
+
+      {props.detailed && <DetailedDay info={props.info} />}
 
       <style jsx>{`
         .minimal {
@@ -112,9 +122,7 @@ function Day(props) {
           max-height: 200px;
         }
 
-
         .day-container {
-          
           display: flex;
           text-align: center;
           flex-direction: row;
@@ -133,7 +141,7 @@ function Day(props) {
           align-items: center;
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 850px) {
           .mini-data-container {
             flex-direction: row;
             justify-content: space-between;
@@ -153,6 +161,13 @@ function Day(props) {
         .day-container :focus {
           color: #023e8a;
           border-color: #023e8a;
+        }
+
+        .dark-day-container:hover,
+        .dark-day-container:active,
+        .dark-day-container:focus {
+          color: #7cffcb;
+          border-color: #7cffcb;
         }
       `}</style>
     </div>

@@ -12,7 +12,7 @@ export default function Home() {
   const [days, setDays] = useState([]);
 
   useEffect(() => {
-    setDark(window.localStorage.getItem("dark"))
+    setDark(window.localStorage.getItem("theme") === "dark")
     axios.get("/api/compliment").then(res => setCompliment(res.data.compliment))
   }, [])
 
@@ -83,11 +83,11 @@ export default function Home() {
 
         <div className="toggle-container">
           {dark && <Sun onClick={() => {
-            window.localStorage.setItem("dark", false)
+            window.localStorage.setItem("theme", "light")
             setDark(false)
           }} />}
           {!dark && <Moon onClick={() => {
-            window.localStorage.setItem("dark", true)
+            window.localStorage.setItem("theme", "dark")
             setDark(true)
           }} />}
         </div>
@@ -95,7 +95,7 @@ export default function Home() {
         <code className={`${dark ? "dark-code" : ""}`}>
           Always Remember: {compliment}</code>
 
-        <Weather days={days} />
+        <Weather days={days} dark={dark}/>
 
         <div className="grid">
 
@@ -127,6 +127,16 @@ export default function Home() {
           </a>
 
           <a
+            href="https://youtube.com"
+            className="card"
+          >
+            <h3>Youtube &rarr;</h3>
+            <p>
+              Try Guys & more.
+            </p>
+          </a>
+
+          <a
             href="https://www.google.com/search?q=cute+dog+pics&sxsrf=ALeKk02j6LDqo0A0nBh_6_NvSNw6S3Rksg:1598465971025&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiQso3jvbnrAhVwplkKHZ5qAk0Q_AUoAXoECA0QAw&biw=896&bih=984"
             className="card"
           >
@@ -146,6 +156,7 @@ export default function Home() {
         >
           <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
         </a>
+        
       </footer>
 
       <style jsx>{`
@@ -158,6 +169,29 @@ export default function Home() {
         .dark-code {
           color: black;
         }
+
+        code:hover,
+        code:active,
+        code:focus {
+          color: #023e8a;
+          border-color: #023e8a;
+        }
+
+        .dark-code:hover,
+        .dark-code:active,
+        .dark-code:focus {
+          background: #7CFFCB;
+          border-color: #7CFFCB;
+          color: black;
+        }
+
+        .dark .card:hover,
+        .dark .card:active,
+        .dark .card:focus {
+          color: #7CFFCB;
+          border-color: #7CFFCB;
+        }
+      
 
         .container {
           min-height: 100vh;
@@ -241,15 +275,12 @@ export default function Home() {
           padding: 0.75rem;
           font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
 
-        code:hover,
-        code:active,
-        code:focus {
-          color: #023e8a;
-          border-color: #023e8a;
-        }
+        
+
+
 
         .grid {
           display: flex;
