@@ -23,7 +23,7 @@ export default function Home() {
       });
   }, []);
 
-  if (compliment.length === 0 || days.length === 0) {
+  if (compliment.length === 0) {
     return <div className={`loading-container ${dark ? "dark" : ""}`}>
       <Loader
         type="Hearts"

@@ -48,7 +48,11 @@ export default function DetailedDay(props) {
               <Umbrella />
             </div>
             <div className={"spacer"}>
-              <p>Rain: {props.info.details.rain}mm</p>
+              <p>
+                {props.info.details.rain
+                  ? "Rain: " + props.info.details.rain + "mm"
+                  : "No rain!"}
+              </p>
             </div>
           </div>
         </div>
@@ -66,8 +70,8 @@ export default function DetailedDay(props) {
       </div>
 
       <div className={"detailed-content-row"}>
-        <TempBreakdown header={"Feels Like"} temps={props.info.feels}/>
-        <TempBreakdown header={"Actual Temp"} temps={props.info.temp}/>
+        <TempBreakdown header={"Feels Like"} temps={props.info.feels} />
+        <TempBreakdown header={"Actual Temp"} temps={props.info.temp} />
       </div>
       <style jsx>{`
         .detailed-content-container {
