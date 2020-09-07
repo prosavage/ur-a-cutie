@@ -16,6 +16,7 @@ export default function Home() {
   }, []);
 
   const getCompliment = () => {
+    console.log("gettin compliment.")
     axios
       .get("/api/compliment")
       .then((res) => setCompliment(res.data.compliment));
@@ -113,9 +114,7 @@ export default function Home() {
 
       <main>
         <h1 className="title">Hi, Megan.</h1>
-
         <p className="description">I hope you're having a great day.</p>
-
         <div className="toggle-container">
           {dark && (
             <Sun
@@ -134,13 +133,10 @@ export default function Home() {
             />
           )}
         </div>
-
-        <code className={`${dark ? "dark-code" : ""}`}>
+        <code onClick={() => getCompliment()} className={`${dark ? "dark-code" : ""} compliment`}>
           Always Remember: {compliment}
         </code>
-
         <Weather days={days} dark={dark} />
-
         <div className="grid">
           {links.map(link => <a href={link.link} className={"card"}>
               <h3>{link.title} &rarr;</h3>
@@ -148,7 +144,6 @@ export default function Home() {
           </a>)}
        </div>
       </main>
-
       <footer>
         <a
           href="https://github.com/ProSavage/ur-a-cutie"
@@ -160,7 +155,6 @@ export default function Home() {
           </code>
         </a>
       </footer>
-
       <style jsx>{`
         .dark {
           background: #212121;
@@ -200,6 +194,10 @@ export default function Home() {
           flex-direction: column;
           justify-content: center;
           align-items: center;
+        }
+
+        .compliment {
+          cursor: pointer;
         }
 
         .toggle-container {
