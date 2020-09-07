@@ -96,6 +96,7 @@ function Day(props) {
         .minimal {
           min-width: 100px;
           max-height: 200px;
+          cursor: pointer;
         }
 
         .day-container {

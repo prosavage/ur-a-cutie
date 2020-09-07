@@ -1,151 +1,152 @@
-import Head from 'next/head'
+import Head from "next/head";
 import { useEffect, useState } from "react";
-import { Sun, Moon } from "react-feather"
-import Weather from '../components/Weather';
+import { Sun, Moon } from "react-feather";
+import Weather from "../components/Weather";
 import axios from "axios";
-import Loader from 'react-loader-spinner'
+import Loader from "react-loader-spinner";
 
 export default function Home() {
-
   const [dark, setDark] = useState(false);
   const [compliment, setCompliment] = useState("");
   const [days, setDays] = useState([]);
 
   useEffect(() => {
-    setDark(window.localStorage.getItem("theme") === "dark")
-    axios.get("/api/compliment").then(res => setCompliment(res.data.compliment))
-  }, [])
-
-  useEffect(() => {
-    axios.get(`/api/weather`)
-      .then((res) => {
-        setDays(res.data.days)
-      });
+    setDark(window.localStorage.getItem("theme") === "dark");
+    getCompliment()
   }, []);
 
+  const getCompliment = () => {
+    axios
+      .get("/api/compliment")
+      .then((res) => setCompliment(res.data.compliment));
+  };
+
+  useEffect(() => {
+    axios.get(`/api/weather`).then((res) => {
+      setDays(res.data.days);
+    });
+  }, []);
+
+
+  const links = [
+    {
+      title: "Canvas",
+      description: "School is important!",
+      link: "https://auburn.instructure.com"
+    },
+    {
+      title: "AUAccess",
+      description: "You're amazing.",
+      link: "https://auaccess.auburn.edu"
+    },
+    {
+      title: "Outlook",
+      description: "Check yo' email",
+      link: "https://outlook.office.com"
+    },
+    {
+      title: "Amazon",
+      description: "Shoppin!",
+      link: "https://amazon.com"
+    },
+    {
+      title: "Youtube",
+      description: "Try guys st00pid!",
+      link: "https://youtube.com"
+    },
+    {
+      title: "Instagram",
+      description: "May I interest you in a meme?",
+      link: "https://instagram.com"
+    },
+  ]
+
   if (compliment.length === 0) {
-    return <div className={`loading-container ${dark ? "dark" : ""}`}>
-      <Loader
-        type="Hearts"
-        color={dark ? "#7CFFCB" : "#023e8a"}
-        height={50}
-        width={50}
-        timeout={10000}
-      />
-      <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
+    return (
+      <div className={`loading-container ${dark ? "dark" : ""}`}>
+        <Loader
+          type="Hearts"
+          color={dark ? "#7CFFCB" : "#023e8a"}
+          height={50}
+          width={50}
+          timeout={10000}
+        />
+        <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
 
-      <style jsx>{`
+        <style jsx>{`
+          .dark {
+            background: #212121;
+            color: white;
+          }
 
-      .dark {
-          background: #212121;
-          color: white;
-        }
-
-        .dark-code {
-          color: black;
-        }
-        .loading-container {
+          .dark-code {
+            color: black;
+          }
+          .loading-container {
             display: flex;
             flex-direction: column;
             width: 100vw;
             height: 100vh;
             justify-content: center;
             align-items: center;
-        }
+          }
 
-        code {
-          background: #fafafa;
-          border-radius: 5px;
-          padding: 0.75rem;
-          font-size: 1.1rem;
-          font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
-        }
+          code {
+            background: #fafafa;
+            border-radius: 5px;
+            padding: 0.75rem;
+            font-size: 1.1rem;
+            font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+              DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+          }
         `}</style>
-    </div>
+      </div>
+    );
   }
 
   return (
-    <div className={`container ${dark ? "dark" : ""}`} >
+    <div className={`container ${dark ? "dark" : ""}`}>
       <Head>
         <title>Hey Cutie</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
-        <h1 className="title">
-          Hi, Megan.
-        </h1>
+        <h1 className="title">Hi, Megan.</h1>
 
-        <p className="description">
-          I hope you're having a great day.
-        </p>
+        <p className="description">I hope you're having a great day.</p>
 
         <div className="toggle-container">
-          {dark && <Sun onClick={() => {
-            window.localStorage.setItem("theme", "light")
-            setDark(false)
-          }} />}
-          {!dark && <Moon onClick={() => {
-            window.localStorage.setItem("theme", "dark")
-            setDark(true)
-          }} />}
+          {dark && (
+            <Sun
+              onClick={() => {
+                window.localStorage.setItem("theme", "light");
+                setDark(false);
+              }}
+            />
+          )}
+          {!dark && (
+            <Moon
+              onClick={() => {
+                window.localStorage.setItem("theme", "dark");
+                setDark(true);
+              }}
+            />
+          )}
         </div>
 
         <code className={`${dark ? "dark-code" : ""}`}>
-          Always Remember: {compliment}</code>
+          Always Remember: {compliment}
+        </code>
 
-        <Weather days={days} dark={dark}/>
+        <Weather days={days} dark={dark} />
 
         <div className="grid">
-
-
-          <a href="https://auburn.instructure.com" className="card">
-            <h3>Canvas &rarr;</h3>
-            <p>School is important!</p>
-          </a>
-
-          <a
-            href="https://auaccess.auburn.edu"
-            className="card"
-          >
-            <h3>AUAccess &rarr;</h3>
-            <p>You're amazing.</p>
-          </a>
-
-          <a
-            href="https://outlook.office.com"
-            className="card"
-          >
-            <h3>Outlook &rarr;</h3>
-            <p>Check yo' email.</p>
-          </a>
-
-          <a href="https://amazon.com" className="card">
-            <h3>Amazon &rarr;</h3>
-            <p>Shoppin'.</p>
-          </a>
-
-          <a
-            href="https://youtube.com"
-            className="card"
-          >
-            <h3>Youtube &rarr;</h3>
-            <p>
-              Try Guys & more.
-            </p>
-          </a>
-
-          <a
-            href="https://www.google.com/search?q=cute+dog+pics&sxsrf=ALeKk02j6LDqo0A0nBh_6_NvSNw6S3Rksg:1598465971025&source=lnms&tbm=isch&sa=X&ved=2ahUKEwiQso3jvbnrAhVwplkKHZ5qAk0Q_AUoAXoECA0QAw&biw=896&bih=984"
-            className="card"
-          >
-            <h3>Cute Dog Pics &rarr;</h3>
-            <p>
-              In case you are feeling sad.
-            </p>
-          </a>
-        </div>
+          {links.map(link => <a href={link.link} className={"card"}>
+              <h3>{link.title} &rarr;</h3>
+              <p>{link.description}</p>
+          </a>)}
+       </div>
       </main>
 
       <footer>
@@ -154,13 +155,13 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
+          <code className={`${dark ? "dark-code" : ""}`}>
+            project ur-a-cutie
+          </code>
         </a>
-        
       </footer>
 
       <style jsx>{`
-
         .dark {
           background: #212121;
           color: white;
@@ -180,18 +181,17 @@ export default function Home() {
         .dark-code:hover,
         .dark-code:active,
         .dark-code:focus {
-          background: #7CFFCB;
-          border-color: #7CFFCB;
+          background: #7cffcb;
+          border-color: #7cffcb;
           color: black;
         }
 
         .dark .card:hover,
         .dark .card:active,
         .dark .card:focus {
-          color: #7CFFCB;
-          border-color: #7CFFCB;
+          color: #7cffcb;
+          border-color: #7cffcb;
         }
-      
 
         .container {
           min-height: 100vh;
@@ -205,7 +205,7 @@ export default function Home() {
         .toggle-container {
           padding-bottom: 25px;
 
-          color: p
+          color: p;
         }
 
         main {
@@ -275,12 +275,8 @@ export default function Home() {
           padding: 0.75rem;
           font-size: 1.1rem;
           font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
-          DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+            DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
         }
-
-        
-
-
 
         .grid {
           display: flex;
@@ -349,6 +345,5 @@ export default function Home() {
         }
       `}</style>
     </div>
-
-  )
+  );
 }
