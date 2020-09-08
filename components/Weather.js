@@ -10,7 +10,6 @@ import {
   Sunrise,
 } from "react-feather";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import DetailedDay from "./DetailedDay";
 
 export default function Weather(props) {

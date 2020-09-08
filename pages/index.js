@@ -1,80 +1,88 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { Sun, Moon } from "react-feather";
+import {useEffect, useState} from "react";
+import {Moon, Sun} from "react-feather";
 import Weather from "../components/Weather";
 import axios from "axios";
 import Loader from "react-loader-spinner";
 
 export default function Home() {
-  const [dark, setDark] = useState(false);
-  const [compliment, setCompliment] = useState("");
-  const [days, setDays] = useState([]);
+    const [dark, setDark] = useState(false);
+    const [compliment, setCompliment] = useState("");
+    const [days, setDays] = useState([]);
+    const [special, setSpecial] = useState(false)
 
-  useEffect(() => {
-    setDark(window.localStorage.getItem("theme") === "dark");
-    getCompliment()
-  }, []);
+    useEffect(() => {
+        setDark(window.localStorage.getItem("theme") === "dark");
+        getCompliment()
+    }, []);
 
-  const getCompliment = () => {
-    console.log("gettin compliment.")
-    axios
-      .get("/api/compliment")
-      .then((res) => setCompliment(res.data.compliment));
-  };
+    const getCompliment = () => {
+        const chance = Math.floor(Math.random() * 1000)
+        console.log("Page chance: ", chance)
+        if (chance === 1) {
+            setCompliment("🎉🎉🎉 WOOT WOOT 🎉🎉🎉")
+            setSpecial(true)
+        } else {
+            axios
+                .get("/api/compliment")
+                .then((res) => setCompliment(res.data.compliment));
+        }
 
-  useEffect(() => {
-    axios.get(`/api/weather`).then((res) => {
-      setDays(res.data.days);
-    });
-  }, []);
+    };
+
+    useEffect(() => {
+        axios.get(`/api/weather`).then((res) => {
+            setDays(res.data.days);
+        });
+    }, []);
 
 
-  const links = [
-    {
-      title: "Canvas",
-      description: "School is important!",
-      link: "https://auburn.instructure.com"
-    },
-    {
-      title: "AUAccess",
-      description: "You're amazing.",
-      link: "https://auaccess.auburn.edu"
-    },
-    {
-      title: "Outlook",
-      description: "Check yo' email",
-      link: "https://outlook.office.com"
-    },
-    {
-      title: "Amazon",
-      description: "Shoppin!",
-      link: "https://amazon.com"
-    },
-    {
-      title: "Youtube",
-      description: "Try guys st00pid!",
-      link: "https://youtube.com"
-    },
-    {
-      title: "Instagram",
-      description: "May I interest you in a meme?",
-      link: "https://instagram.com"
-    },
-  ]
+    const links = [
+        {
+            title: "Canvas",
+            description: "School is important!",
+            link: "https://auburn.instructure.com"
+        },
+        {
+            title: "AUAccess",
+            description: "You're amazing.",
+            link: "https://auaccess.auburn.edu"
+        },
+        {
+            title: "Outlook",
+            description: "Check yo' email",
+            link: "https://outlook.office.com"
+        },
+        {
+            title: "Amazon",
+            description: "Shoppin!",
+            link: "https://amazon.com"
+        },
+        {
+            title: "Youtube",
+            description: "Try guys st00pid!",
+            link: "https://youtube.com"
+        },
+        {
+            title: "Instagram",
+            description: "May I interest you in a meme?",
+            link: "https://instagram.com"
+        },
+    ]
 
-  if (compliment.length === 0) {
-    return (
-      <div className={`loading-container ${dark ? "dark" : ""}`}>
-        <Loader
-          type="Hearts"
-          color={dark ? "#7CFFCB" : "#023e8a"}
-          height={50}
-          width={50}
-          timeout={10000}
-        />
-        <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
+    if (compliment.length === 0) {
+        return (
+            <div className={`loading-container ${dark ? "dark" : ""}`}>
+                <Loader
+                    type="Hearts"
+                    color={dark ? "#7CFFCB" : "#023e8a"}
+                    height={50}
+                    width={50}
+                    timeout={10000}
+                />
+                <code className={`${dark ? "dark-code" : ""}`}>project ur-a-cutie</code>
 
-        <style jsx>{`
+                <style jsx>{`
           .dark {
             background: #212121;
             color: white;
@@ -101,61 +109,64 @@ export default function Home() {
               DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
           }
         `}</style>
-      </div>
-    );
-  }
+            </div>
+        );
+    }
 
-  return (
-    <div className={`container ${dark ? "dark" : ""}`}>
-      <Head>
-        <title>Hey Cutie</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    return (
+        <div className={`container ${dark ? "dark" : ""}`}>
+            <Head>
+                <title>Hey Cutie</title>
+                <link rel="icon" href="/favicon.ico"/>
+            </Head>
 
-      <main>
-        <h1 className="title">Hi, Megan.</h1>
-        <p className="description">I hope you're having a great day.</p>
-        <div className="toggle-container">
-          {dark && (
-            <Sun
-              onClick={() => {
-                window.localStorage.setItem("theme", "light");
-                setDark(false);
-              }}
-            />
-          )}
-          {!dark && (
-            <Moon
-              onClick={() => {
-                window.localStorage.setItem("theme", "dark");
-                setDark(true);
-              }}
-            />
-          )}
-        </div>
-        <code onClick={() => getCompliment()} className={`${dark ? "dark-code" : ""} compliment`}>
-          Always Remember: {compliment}
-        </code>
-        <Weather days={days} dark={dark} />
-        <div className="grid">
-          {links.map(link => <a href={link.link} className={"card"}>
-              <h3>{link.title} &rarr;</h3>
-              <p>{link.description}</p>
-          </a>)}
-       </div>
-      </main>
-      <footer>
-        <a
-          href="https://github.com/ProSavage/ur-a-cutie"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <code className={`${dark ? "dark-code" : ""}`}>
-            project ur-a-cutie
-          </code>
-        </a>
-      </footer>
-      <style jsx>{`
+            <main>
+                <h1 className="title">Hi, Megan.</h1>
+                {special && <img className={"pfp"} src={"https://meganthurmond.b-cdn.net/megan-transparent.png"}/>}
+
+                <p className="description">{special ? "I fuckin love you!" : "I hope you're having a great day."}</p>
+                <div className="toggle-container">
+                    {dark && (
+                        <Sun
+                            onClick={() => {
+                                window.localStorage.setItem("theme", "light");
+                                setDark(false);
+                            }}
+                        />
+                    )}
+                    {!dark && (
+                        <Moon
+                            onClick={() => {
+                                window.localStorage.setItem("theme", "dark");
+                                setDark(true);
+                            }}
+                        />
+                    )}
+                </div>
+                <code onClick={() => getCompliment()} className={`${dark ? "dark-code" : ""} compliment`}>
+                    Always Remember: {compliment}
+                </code>
+
+                <Weather days={days} dark={dark}/>
+                <div className="grid">
+                    {links.map(link => <a key={link.link} href={link.link} className={"card"}>
+                        <h3>{link.title} &rarr;</h3>
+                        <p>{link.description}</p>
+                    </a>)}
+                </div>
+            </main>
+            <footer>
+                <a
+                    href="https://github.com/ProSavage/ur-a-cutie"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <code className={`${dark ? "dark-code" : ""}`}>
+                        project ur-a-cutie
+                    </code>
+                </a>
+            </footer>
+            <style jsx>{`
         .dark {
           background: #212121;
           color: white;
@@ -163,6 +174,11 @@ export default function Home() {
 
         .dark-code {
           color: black;
+        }
+        
+        .pfp {
+          width: 250px;
+          height: 250px;
         }
 
         code:hover,
@@ -328,7 +344,7 @@ export default function Home() {
         }
       `}</style>
 
-      <style jsx global>{`
+            <style jsx global>{`
         html,
         body {
           padding: 0;
@@ -342,6 +358,6 @@ export default function Home() {
           box-sizing: border-box;
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 }
