@@ -19,6 +19,7 @@ export default async (req, res) => {
         "You are my favorite person 🍩",
         "You are appreciated 😍",
         "You have a great sense of humor 🤪",
+        "You are like a unicorn, but real 🦄",
         "On a scale of 1 to 10, you are a 999999999999999999999999999999999999999999999999999"
     ]
 
