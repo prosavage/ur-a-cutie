@@ -15,7 +15,11 @@ export default async (req, res) => {
         "You are my everything 🤩",
         "You are a beauty 🥺",
         "You are dramatic af 😜",
-        "You are my queen 👸"
+        "You are my queen 👸",
+        "You are my favorite person 🍩",
+        "You are appreciated 😍",
+        "You have a great sense of humor 🤪",
+        "On a scale of 1 to 10, you are a 999999999999999999999999999999999999999999999999999"
     ]
 
     const chosenCompliment = compliments[Math.floor(Math.random() * compliments.length)];
