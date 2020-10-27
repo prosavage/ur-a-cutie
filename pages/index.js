@@ -4,7 +4,6 @@ import {Moon, Sun} from "react-feather";
 import Weather from "../components/Weather";
 import axios from "axios";
 import Loader from "react-loader-spinner";
-import Skeleton from "react-loading-skeleton";
 
 export default function Home() {
     const [dark, setDark] = useState(false);
@@ -19,7 +18,7 @@ export default function Home() {
             setCompliment(res.data.compliment)
         })
         axios.get(`/api/weather`).then((res) => {
-            // setDays(res.data.days);
+            setDays(res.data.days);
         });
     }, []);
 
