@@ -1,49 +1,41 @@
-import {
-  CloudLightning,
-  CloudRain,
-  CloudDrizzle,
-  CloudSnow,
-  Cloud,
-  Sun,
-  Circle,
-  Moon,
-  Sunrise,
-} from "react-feather";
-import { useEffect, useState } from "react";
+import {Circle, Cloud, CloudDrizzle, CloudLightning, CloudRain, CloudSnow, Sun,} from "react-feather";
+import {useState} from "react";
 import DetailedDay from "./DetailedDay";
+import Skeleton, {SkeletonTheme} from "react-loading-skeleton";
 
 export default function Weather(props) {
-  const [selectedDay, setSelectedDay] = useState(undefined);
+    const [selectedDay, setSelectedDay] = useState(undefined);
 
-  return (
-    <div className="weather-wrapper">
-      <h3>Weather</h3>
-      <div className="weather-container">
-        {!selectedDay &&
-          props.days.map((day) => {
-            return (
-              <Day
-                onSelectEvent={() => {
-                  setSelectedDay(day);
-                }}
-                info={day}
-                dark={props.dark}
-              />
-            );
-          })}
-        {selectedDay && (
-          <Day
-            onSelectEvent={() => {
-              setSelectedDay(undefined);
-            }}
-            detailed
-            info={selectedDay}
-            dark={props.dark}
-          />
-        )}
-      </div>
 
-      <style jsx>{`
+    return (
+        <div className="weather-wrapper">
+            <h3>Weather</h3>
+            <div className="weather-container">
+                {!selectedDay &&
+                props.days.map((day) => {
+                    return (
+                        <Day
+                            onSelectEvent={() => {
+                                setSelectedDay(day);
+                            }}
+                            info={day}
+                            dark={props.dark}
+                        />
+                    );
+                })}
+                {selectedDay && (
+                    <Day
+                        onSelectEvent={() => {
+                            setSelectedDay(undefined);
+                        }}
+                        detailed
+                        info={selectedDay}
+                        dark={props.dark}
+                    />
+                )}
+            </div>
+
+            <style jsx>{`
         .weather-wrapper {
           display: flex;
           flex-direction: column;
@@ -68,30 +60,33 @@ export default function Weather(props) {
           padding-top: 15px;
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 }
 
 function Day(props) {
-  
 
-  return (
-    <div
-      onClick={props.onSelectEvent}
-      className={`day-container ${props.dark ? "dark-day-container" : ""}`}
-    >
-      {!props.detailed && (
-        <div className={"mini-data-container minimal"}>
-          <p>{props.info.date.toString()}</p>
-          {getIcon(props.info.icon)}
-          <p>{props.info.temp.day}&#176;</p>
-          <p>{props.info.desc}</p>
-        </div>
-      )}
 
-      {props.detailed && <DetailedDay info={props.info} />}
+    return (
+        <div
+            onClick={props.onSelectEvent}
+            className={`day-container ${props.dark ? "dark-day-container" : ""}`}
+        >
+            {!props.detailed && (
+                <SkeletonTheme color="#BEBDBD" highlightColor={props.dark ? "#7CFFCB" : "#eaeaea"}>
+                    <div className={"mini-data-container minimal"}>
+                        <p>{props.info?.date?.toString() || <Skeleton width={"100px"}/>}</p>
+                        {getIcon(props?.info?.icon) || <Skeleton circle={true} height={35} width={35}/>}
 
-      <style jsx>{`
+                        {props?.info?.temp?.day ? <p>{props?.info?.temp?.day}</p> : <p><Skeleton width={"100px"}/></p>}
+                        <p>{props?.info?.desc || <Skeleton width={"100px"}/>}</p>
+                    </div>
+                </SkeletonTheme>
+            )}
+
+            {props.detailed && <DetailedDay info={props.info}/>}
+
+            <style jsx>{`
         .minimal {
           min-width: 100px;
           max-height: 200px;
@@ -146,33 +141,33 @@ function Day(props) {
           border-color: #7cffcb;
         }
       `}</style>
-    </div>
-  );
+        </div>
+    );
 }
 
 
 export const getIcon = (iconString) => {
-  switch (iconString) {
-    case "Thunderstorm":
-      return <CloudLightning />;
-      break;
-    case "Rain":
-      return <CloudRain />;
-      break;
-    case "Drizzle":
-      return <CloudDrizzle />;
-      break;
-    case "Snow":
-      return <CloudSnow />;
-      break;
-    case "Atmosphere":
-      return <Circle />;
-      break;
-    case "Clear":
-      return <Sun />;
-      break;
-    case "Clouds":
-      return <Cloud />;
-      break;
-  }
+    switch (iconString) {
+        case "Thunderstorm":
+            return <CloudLightning/>;
+            break;
+        case "Rain":
+            return <CloudRain/>;
+            break;
+        case "Drizzle":
+            return <CloudDrizzle/>;
+            break;
+        case "Snow":
+            return <CloudSnow/>;
+            break;
+        case "Atmosphere":
+            return <Circle/>;
+            break;
+        case "Clear":
+            return <Sun/>;
+            break;
+        case "Clouds":
+            return <Cloud/>;
+            break;
+    }
 };

@@ -4,38 +4,24 @@ import {Moon, Sun} from "react-feather";
 import Weather from "../components/Weather";
 import axios from "axios";
 import Loader from "react-loader-spinner";
+import Skeleton from "react-loading-skeleton";
 
 export default function Home() {
     const [dark, setDark] = useState(false);
-    const [compliment, setCompliment] = useState("");
-    const [days, setDays] = useState([]);
-    const [special, setSpecial] = useState(false)
+    const [days, setDays] = useState([undefined, undefined, undefined, undefined, undefined]);
+    const [compliment, setCompliment] = useState("")
+
 
     useEffect(() => {
+
         setDark(window.localStorage.getItem("theme") === "dark");
-        getCompliment()
-    }, []);
-
-    const getCompliment = () => {
-        const chance = Math.floor(Math.random() * 1000)
-        console.log("Page chance: ", chance)
-        if (chance === 1) {
-            setCompliment("🎉🎉🎉 WOOT WOOT 🎉🎉🎉")
-            setSpecial(true)
-        } else {
-            axios
-                .get("/api/compliment")
-                .then((res) => setCompliment(res.data.compliment));
-        }
-
-    };
-
-    useEffect(() => {
+        axios.get("/api/compliment").then((res) => {
+            setCompliment(res.data.compliment)
+        })
         axios.get(`/api/weather`).then((res) => {
-            setDays(res.data.days);
+            // setDays(res.data.days);
         });
     }, []);
-
 
     const links = [
         {
@@ -122,9 +108,8 @@ export default function Home() {
 
             <main>
                 <h1 className="title">Hi, Megan.</h1>
-                {special && <img className={"pfp"} src={"https://meganthurmond.b-cdn.net/megan-transparent.png"}/>}
 
-                <p className="description">{special ? "I fuckin love you!" : "I hope you're having a great day."}</p>
+                <p className="description">I hope you're having a great day.</p>
                 <div className="toggle-container">
                     {dark && (
                         <Sun
@@ -218,8 +203,6 @@ export default function Home() {
 
         .toggle-container {
           padding-bottom: 25px;
-
-          color: p;
         }
 
         main {
@@ -343,7 +326,6 @@ export default function Home() {
           }
         }
       `}</style>
-
             <style jsx global>{`
         html,
         body {
@@ -357,7 +339,9 @@ export default function Home() {
         * {
           box-sizing: border-box;
         }
-      `}</style>
+      `}
+            </style>
         </div>
     );
 }
+

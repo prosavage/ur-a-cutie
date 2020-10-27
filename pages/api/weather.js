@@ -12,7 +12,6 @@ export default async (req, res) => {
       desc: day.weather[0].description.replace(" intensity", ""),
       date: format(new Date(day.dt * 1000), "MM/dd"),
       date_full: format(new Date(day.dt * 1000), "MMMM dd, yyyy"),
-      temp: { day: day.temp.day, night: day.temp.night },
       details: { humidity: day.humidity, rain: day.rain, wind: day.wind_speed },
       feels: {
         day: day.feels_like.day,
@@ -28,6 +27,7 @@ export default async (req, res) => {
       },
     };
   });
+
 
   res.statusCode = 200;
   res.json({ days });
