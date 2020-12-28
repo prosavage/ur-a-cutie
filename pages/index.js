@@ -12,7 +12,6 @@ export default function Home() {
 
 
     useEffect(() => {
-
         setDark(window.localStorage.getItem("theme") === "dark");
         axios.get("/api/compliment").then((res) => {
             setCompliment(res.data.compliment)
@@ -127,7 +126,7 @@ export default function Home() {
                         />
                     )}
                 </div>
-                <code onClick={() => getCompliment()} className={`${dark ? "dark-code" : ""} compliment`}>
+                <code className={`${dark ? "dark-code" : ""} compliment`}>
                     Always Remember: {compliment}
                 </code>
 
@@ -205,7 +204,7 @@ export default function Home() {
         }
 
         main {
-          padding: 5rem 0;
+          padding: 3rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
