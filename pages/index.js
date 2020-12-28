@@ -204,7 +204,7 @@ export default function Home() {
         }
 
         main {
-          padding: 3rem 0;
+          padding: 2.5rem 0;
           flex: 1;
           display: flex;
           flex-direction: column;
@@ -293,6 +293,12 @@ export default function Home() {
           border: 2px solid #eaeaea;
           border-radius: 10px;
           transition: color 0.15s ease, border-color 0.15s ease;
+        }
+
+        @media(max-width: 850px) {
+          .card {
+            width: 300px;
+          }
         }
 
         .card:hover,

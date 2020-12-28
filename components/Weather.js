@@ -88,7 +88,7 @@ function Day(props) {
 
             <style jsx>{`
         .minimal {
-          min-width: 100px;
+          width: 100px;
           max-height: 200px;
           cursor: pointer;
         }
@@ -120,6 +120,7 @@ function Day(props) {
 
           .minimal {
             width: 300px;
+            min-height: auto;
           }
 
           .day-container {
