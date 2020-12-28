@@ -35,7 +35,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">Hi, Naman.</h1>
+        <h1 className="title">Hi, Megan.</h1>
 
         <p className="description">I hope you're having a great day.</p>
         <div className="toggle-container">

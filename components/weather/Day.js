@@ -1,5 +1,6 @@
 import { getIcon } from "./Weather";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
+import DetailedDay from "./DetailedDay";
 
 function Day(props) {
 
