@@ -35,9 +35,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="title">Hi, Megan.</h1>
+        <h1 className="title">Hi, Cutie 🥧!</h1>
 
-        <p className="description">I hope you're having a great day.</p>
+        <p className="description">Happy Valentine's Day 💝.</p>
         <div className="toggle-container">
           {dark ?
             <Sun
@@ -75,15 +75,15 @@ export default function Home() {
         code:hover,
         code:active,
         code:focus {
-          color: #023e8a;
-          border-color: #023e8a;
+          color: #F687B3;
+          border-color: #F687B3;
         }
 
         .dark-code:hover,
         .dark-code:active,
         .dark-code:focus {
-          background: #7cffcb;
-          border-color: #7cffcb;
+          background: #ED64A6;
+          border-color: #ED64A6;
           color: black;
         }
 

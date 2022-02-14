@@ -13,7 +13,7 @@ function Day(props) {
             className={`day-container ${props.dark ? "dark-day-container" : ""}`}
         >
             {!props.detailed && (
-                <SkeletonTheme color="#BEBDBD" highlightColor={props.dark ? "#7CFFCB" : "#eaeaea"}>
+                <SkeletonTheme color="#BEBDBD" highlightColor={props.dark ? "#ED64A6" : "#eaeaea"}>
                     <div className={"mini-data-container minimal"}>
                         <p>{props.info?.date?.toString() || <Skeleton width={"100px"} />}</p>
                         {getIcon(props?.info?.icon) || <Skeleton circle={true} height={35} width={35} />}
@@ -74,15 +74,15 @@ function Day(props) {
         .day-container :hover,
         .day-container :active,
         .day-container :focus {
-          color: #023e8a;
-          border-color: #023e8a;
+          color: #F687B3;
+          border-color: #F687B3;
         }
 
         .dark-day-container:hover,
         .dark-day-container:active,
         .dark-day-container:focus {
-          color: #7cffcb;
-          border-color: #7cffcb;
+          color: #ED64A6;
+          border-color: #ED64A6;
         }
       `}</style>
         </>

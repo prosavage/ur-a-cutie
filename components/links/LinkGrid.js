@@ -4,35 +4,20 @@ function LinkGrid() {
 
   const links = [
     {
-      title: "Canvas",
-      description: "School is important!",
-      link: "https://auburn.instructure.com"
+      title: "MTG List",
+      description: "Useful list of mtg cards.",
+      link: "https://gatherer.wizards.com/Pages/Default.aspx",
     },
     {
-      title: "AUAccess",
-      description: "You're amazing.",
-      link: "https://auaccess.auburn.edu"
+      title: "Pics of Archie",
+      description: "Feeling Down? Check these.",
+      link: "https://www.icloud.com/sharedalbum/#B0OGWZuqDJpPvsa",
     },
     {
-      title: "Outlook",
-      description: "Check yo' email",
-      link: "https://outlook.office.com"
-    },
-    {
-      title: "Amazon",
-      description: "Shoppin!",
-      link: "https://amazon.com"
-    },
-    {
-      title: "Youtube",
-      description: "Try guys st00pid!",
-      link: "https://youtube.com"
-    },
-    {
-      title: "Instagram",
-      description: "May I interest you in a meme?",
-      link: "https://instagram.com"
-    },
+      title: "Doordash",
+      description: "Hungry? Feeling Lazy? Check this.",
+      link: "https://doordash.com"
+    }
   ]
 
 

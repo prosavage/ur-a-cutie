@@ -8,8 +8,8 @@ function LinkGridCard(props) {
         .dark .card:hover,
         .dark .card:active,
         .dark .card:focus {
-          color: #7cffcb;
-          border-color: #7cffcb;
+          color: #ED64A6;
+          border-color: #ED64A6;
         }
 
         .card {
@@ -33,8 +33,8 @@ function LinkGridCard(props) {
         .card:hover,
         .card:focus,
         .card:active {
-          color: #023e8a;
-          border-color: #023e8a;
+          color: #F687B3;
+          border-color: #F687B3;
         }
 
         .card h3 {

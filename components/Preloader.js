@@ -4,7 +4,7 @@ function Preloader(props) {
         <div className={`loading-container ${props.dark ? "dark" : ""}`}>
             <Loader
                 type="Hearts"
-                color={props.dark ? "#7CFFCB" : "#023e8a"}
+                color={props.dark ? "#ED64A6" : "#F687B3"}
                 height={50}
                 width={50}
                 timeout={10000}
