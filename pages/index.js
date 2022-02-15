@@ -8,7 +8,7 @@ import LinkGrid from "../components/links/LinkGrid";
 import Footer from "../components/Footer";
 
 export default function Home() {
-  const [dark, setDark] = useState(false);
+  const [dark, setDark] = useState(true);
   const [days, setDays] = useState([undefined, undefined, undefined, undefined, undefined]);
   const [compliment, setCompliment] = useState("")
 
@@ -37,7 +37,7 @@ export default function Home() {
       <main>
         <h1 className="title">Hi, Cutie 🥧!</h1>
 
-        <p className="description">Happy Valentine's Day 💝.</p>
+        <p className="description">Hope you're having a great day!</p>
         <div className="toggle-container">
           {dark ?
             <Sun
